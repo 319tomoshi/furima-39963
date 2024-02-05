@@ -9,3 +9,5 @@ FactoryBot.define do
     last_name_kana         { 'ナカムラ' }
     first_name_kana        { 'トモシ' }
     date_of_birth          { Faker::Date.birthday }
+  end
+end
