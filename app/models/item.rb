@@ -8,7 +8,7 @@ class Item < ApplicationRecord
 
   has_one_attached :image
 
-  validates :name, :description, :price, presence: true
+  validates :name, :description, :price, :user_id, presence: true
 
   validates :category_id, :condition_id, :shipping_fee_paid_by_id, :origin_region_id, :shipping_day_id, numericality: { other_than: 1, message: "can't be blank" }
 end
