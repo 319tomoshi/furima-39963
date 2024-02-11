@@ -1,5 +1,5 @@
 function calculateSellingPrice (){
-  
+
   const priceInput = document.getElementById("item-price");
   const addTaxDom = document.getElementById("add-tax-price");
   const profitDom = document.getElementById("profit");
@@ -15,7 +15,7 @@ function calculateSellingPrice (){
       return;
     }
 
-    if (inputValue >= 300) {
+    if (inputValue >= 1) {
       addTaxDom.innerHTML = `${tax}`;
       profitDom.innerHTML = `${profit}`;
     } else {
