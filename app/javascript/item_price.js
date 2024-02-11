@@ -13,14 +13,6 @@ function calculateSellingPrice (){
       profitDom.innerHTML = '';
       return;
     }
-
-    if (inputValue >= 300) {
-      addTaxDom.innerHTML = `${tax}`;
-      profitDom.innerHTML = `${profit}`;
-    } else {
-      addTaxDom.innerHTML = '';
-      profitDom.innerHTML = '';
-    }
   })
 };
 

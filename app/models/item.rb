@@ -9,7 +9,9 @@ class Item < ApplicationRecord
 
   has_one_attached :image
 
-  validates :name, :description, :price, :user_id, presence: true
-
-  validates :category_id, :condition_id, :shipping_fee_paid_by_id, :origin_region_id, :shipping_day_id, numericality: { other_than: 1, message: "can't be blank" }
+  validates :name, :description, :image, presence: true
+  validates :category_id, :condition_id, :shipping_fee_paid_by_id, :origin_region_id, :shipping_day_id,
+            numericality: { other_than: 1, message: "can't be blank" }
+  validates :price, presence: true,
+                    numericality: { greater_than_or_equal_to: 300, less_than_or_equal_to: 9_999_999, message: 'must be more than 300 and less than 9999999' }
 end
