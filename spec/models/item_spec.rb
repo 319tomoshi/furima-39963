@@ -52,15 +52,20 @@ RSpec.describe Item, type: :model do
         @item.valid?
         expect(@item.errors.full_messages).to include("Price can't be blank")
       end
+      it 'priceに半角数字以外が含まれている場合は保存できない' do
+        @item.price = '５５５5'
+        @item.valid?
+        expect(@item.errors.full_messages).to include('Price must be an integer greater than 300 and less than 9999999')
+      end
       it 'priceの値が299以下では保存できない' do
         @item.price = '299'
         @item.valid?
-        expect(@item.errors.full_messages).to include('Price must be more than 300 and less than 9999999')
+        expect(@item.errors.full_messages).to include('Price must be an integer greater than 300 and less than 9999999')
       end
       it 'priceの値が10000000以上では保存できない' do
         @item.price = '10000000'
         @item.valid?
-        expect(@item.errors.full_messages).to include('Price must be more than 300 and less than 9999999')
+        expect(@item.errors.full_messages).to include('Price must be an integer greater than 300 and less than 9999999')
       end
       it 'userが紐付いていないと保存できない' do
         @item.user = nil
