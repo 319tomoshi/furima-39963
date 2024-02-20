@@ -1,5 +1,5 @@
 class ItemsController < ApplicationController
-  before_action :authenticate_user!, only: [:new, :edit]
+  before_action :authenticate_user!, only: [:new, :edit, :destroy]
   before_action :find_item, only: [:show, :edit, :update]
 
   def new
@@ -33,6 +33,16 @@ class ItemsController < ApplicationController
       redirect_to item_path(@item)
     else 
       render :edit, status: :unprocessable_entity
+    end
+  end
+
+  def destroy
+    item = Item.find(params[:id])
+    if user_signed_in? && current_user == item.user
+      item.destroy
+      redirect_to root_path
+    else
+      redirect_to root_path
     end
   end
 
