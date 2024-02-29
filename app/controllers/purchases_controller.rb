@@ -7,7 +7,8 @@ class PurchasesController < ApplicationController
 
   def create
     @purchase = Purchase.create(purchase_params)
-    ShippingAddress.create(address_params)
+    ShippingAddress.create(shipping_address_params)
+    redirect_to root_path
   end
 
   private
@@ -17,11 +18,11 @@ class PurchasesController < ApplicationController
   end
 
   def purchase_params
-    params.permit().merge(user_id: current_user.id, item_id: @item.id)
+    params.require(:purchase_address).permit().merge(user_id: current_user.id, item_id: @item.id)
   end
 
-  def address_params
-    params.permit(:postal_code, :origin_region_id, :city, :street_number, :building_name, :phone_number).merge(purchase_id: @purchase.id)
+  def shipping_address_params
+    params.require(:purchase_address).permit(:postal_code, :origin_region_id, :city, :street_number, :building_name, :phone_number).merge(purchase_id: @purchase.id)
   end
 
 end
