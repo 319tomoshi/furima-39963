@@ -9,7 +9,6 @@ RSpec.describe PurchaseAddress, type: :model do
   end
 
   describe '配送先情報の保存' do
-
     context '入力に問題ない場合' do
       it 'すべての値が正しく入力されていれば保存できる' do
         expect(@purchase_address).to be_valid
@@ -32,7 +31,7 @@ RSpec.describe PurchaseAddress, type: :model do
         @purchase_address.postal_code = '1234567'
         @purchase_address.valid?
         sleep(1)
-        expect(@purchase_address.errors.full_messages).to include("Postal code is invalid. Include hyphen(-)")
+        expect(@purchase_address.errors.full_messages).to include('Postal code is invalid. Include hyphen(-)')
       end
       it 'origin_region_idが空だと保存できない' do
         @purchase_address.origin_region_id = '1'
@@ -62,13 +61,13 @@ RSpec.describe PurchaseAddress, type: :model do
         @purchase_address.phone_number = '０７０１２３４５６７８'
         @purchase_address.valid?
         sleep(1)
-        expect(@purchase_address.errors.full_messages).to include("Phone number must be an integer")
+        expect(@purchase_address.errors.full_messages).to include('Phone number must be an integer')
       end
       it 'phone_numberが10桁以上11桁以内でないと保存できない' do
         @purchase_address.phone_number = '070123456789'
         @purchase_address.valid?
         sleep(1)
-        expect(@purchase_address.errors.full_messages).to include("Phone number must be 10 to 11 digits")
+        expect(@purchase_address.errors.full_messages).to include('Phone number must be 10 to 11 digits')
       end
       it 'tokenが空では保存できない' do
         @purchase_address.token = nil
