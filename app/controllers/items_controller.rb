@@ -23,7 +23,7 @@ class ItemsController < ApplicationController
   end
 
   def edit
-    unless user_signed_in? && current_user == @item.user
+    if current_user != @item.user || @item.purchase.present?
       redirect_to action: :index
     end
   end
