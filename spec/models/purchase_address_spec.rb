@@ -63,7 +63,13 @@ RSpec.describe PurchaseAddress, type: :model do
         sleep(1)
         expect(@purchase_address.errors.full_messages).to include('Phone number must be an integer')
       end
-      it 'phone_numberが10桁以上11桁以内でないと保存できない' do
+      it 'phone_numberが9桁以下では保存できない' do
+        @purchase_address.phone_number = '070123456'
+        @purchase_address.valid?
+        sleep(1)
+        expect(@purchase_address.errors.full_messages).to include('Phone number must be 10 to 11 digits')
+      end
+      it 'phone_numberが12桁以上では保存できない' do
         @purchase_address.phone_number = '070123456789'
         @purchase_address.valid?
         sleep(1)
@@ -74,6 +80,18 @@ RSpec.describe PurchaseAddress, type: :model do
         @purchase_address.valid?
         sleep(1)
         expect(@purchase_address.errors.full_messages).to include("Token can't be blank")
+      end
+      it 'user_idが空では保存できない' do
+        @purchase_address.user_id = nil
+        @purchase_address.valid?
+        sleep(1)
+        expect(@purchase_address.errors.full_messages).to include("User can't be blank")
+      end
+      it 'item_idが空では保存できない' do
+        @purchase_address.item_id = nil
+        @purchase_address.valid?
+        sleep(1)
+        expect(@purchase_address.errors.full_messages).to include("Item can't be blank")
       end
     end
   end
