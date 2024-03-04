@@ -8,6 +8,7 @@ class Item < ApplicationRecord
   belongs_to :shipping_day
 
   has_one_attached :image
+  has_one :purchase
 
   validates :name, :description, :image, presence: true
   validates :category_id, :condition_id, :shipping_fee_paid_by_id, :origin_region_id, :shipping_day_id,

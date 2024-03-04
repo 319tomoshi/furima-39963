@@ -23,15 +23,15 @@ class ItemsController < ApplicationController
   end
 
   def edit
-    unless user_signed_in? && current_user == @item.user
-      redirect_to action: :index
-    end
+    return unless current_user != @item.user || @item.purchase.present?
+
+    redirect_to action: :index
   end
 
   def update
     if @item.update(item_params)
       redirect_to item_path(@item)
-    else 
+    else
       render :edit, status: :unprocessable_entity
     end
   end
