@@ -15,15 +15,10 @@ function calculateSellingPrice (){
       return;
     }
 
-    if (inputValue >= 1) {
-      addTaxDom.innerHTML = `${tax}`;
-      profitDom.innerHTML = `${profit}`;
-    } else {
-      addTaxDom.innerHTML = '';
-      profitDom.innerHTML = '';
-    }
-
+    addTaxDom.innerHTML = `${tax}`;
+    profitDom.innerHTML = `${profit}`;
   })
 };
 
-window.addEventListener('turbo:load', calculateSellingPrice)
+window.addEventListener('turbo:load', calculateSellingPrice);
+window.addEventListener("turbo:render", calculateSellingPrice);
